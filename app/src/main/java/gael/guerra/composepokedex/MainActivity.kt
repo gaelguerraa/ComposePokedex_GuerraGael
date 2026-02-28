@@ -10,12 +10,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
@@ -32,6 +37,7 @@ import androidx.compose.ui.zIndex
 import gael.guerra.composepokedex.domain.Pokemon
 import gael.guerra.composepokedex.components.Ability
 import gael.guerra.composepokedex.components.Chip
+import gael.guerra.composepokedex.components.PokemonNext
 import gael.guerra.composepokedex.ui.theme.Red
 import gael.guerra.composepokedex.ui.theme.White
 import gael.guerra.composepokedex.ui.theme.ElectricYellow
@@ -91,8 +97,8 @@ fun PokemonHeaderPreview(){
 }
 
 @Composable
-fun PokemonCard(name: String, weight: Float, height: Float, description: String, ability: String, type: String, image: Int){
-    Box(contentAlignment = Alignment.TopCenter){
+fun PokemonCard(name: String, weight: Float, height: Float, description: String, ability: String, type: String, image: Int, modifier: Modifier = Modifier){
+    Box(modifier = modifier.fillMaxWidth(),contentAlignment = Alignment.TopCenter){
         Image(painter = painterResource(image), contentDescription = name,
             Modifier.offset(0.dp, -80.dp)
                 .zIndex(2f)
@@ -123,6 +129,26 @@ fun PokemonCard(name: String, weight: Float, height: Float, description: String,
                     .padding(25.dp)) {
                     Text(description)
                 }
+                Spacer(modifier = Modifier.weight(1f))
+                Row(Modifier.fillMaxWidth(0.9f)
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    PokemonNext(
+                        position = "left",
+                        image = R.drawable.snorlax,
+                        name = "snorlax",
+                        number = 24
+                    )
+                    PokemonNext(
+                        position = "right",
+                        image = R.drawable.charma,
+                        name = "charmander",
+                        number = 26
+                    )
+                }
             }
 
         }
@@ -134,7 +160,9 @@ fun Greeting(pokemon: Pokemon, modifier: Modifier = Modifier) {
     Column(Modifier.background(ElectricYellow, RectangleShape)){
         PokemonHeader(pokemon.name, pokemon.number, pokemon.fav)
         PokemonCard(pokemon.name, pokemon.weight, pokemon.height,
-            pokemon.description, pokemon.ability, pokemon.type,pokemon.imagen)
+            pokemon.description, pokemon.ability, pokemon.type,pokemon.imagen,
+        modifier = Modifier.weight(1f))
+
     }
 }
 
