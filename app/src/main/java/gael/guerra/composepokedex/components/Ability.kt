@@ -2,8 +2,10 @@ package gael.guerra.composepokedex.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Label
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import gael.guerra.composepokedex.ui.theme.Red
 import gael.guerra.composepokedex.ui.theme.Red
 
 @Composable
