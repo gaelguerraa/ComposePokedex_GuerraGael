@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import gael.guerra.composepokedex.dummies.getAdjacentPokemon
 import gael.guerra.composepokedex.dummies.getPokemon
 import gael.guerra.composepokedex.dummies.showAllPokemon
 import gael.guerra.composepokedex.screens.PokedexMenuScreen
@@ -77,7 +78,13 @@ fun MyApp(){
 
         composable<PokemonDetail> { backStackEntry ->
             val pokemon: PokemonDetail = backStackEntry.toRoute()
-            PokemonDetailScreen(getPokemon(pokemon.id))
+            PokemonDetailScreen(
+                pokemon = getPokemon(pokemon.id),
+                adjacentPokemon = getAdjacentPokemon(pokemon.id),
+                onNavigatePokemon = { selectedId ->
+                    navController.navigate(route = PokemonDetail(id = selectedId))
+                }
+            )
         }
     }
 }
