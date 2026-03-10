@@ -36,9 +36,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(pokemon: Pokemon, modifier: Modifier = Modifier) {
-    Column(Modifier.background(ElectricYellow, RectangleShape)) {
+    Column(modifier.background(ElectricYellow, RectangleShape)) {
         PokemonHeader(pokemon.name, pokemon.number, pokemon.fav)
-        PokemonCard(pokemon.name,pokemon.weight, pokemon.height, pokemon.description, pokemon.ability, pokemon.type, pokemon.imagen)
+        PokemonCard(
+            pokemon = pokemon,
+            adjacentPokemon = Pair(null, null),
+            onNavigatePokemon = {}
+        )
 
     }
 }
